@@ -260,7 +260,7 @@ class AmbientSoundService {
             : '';
         if (['.mp3', '.wav', '.ogg', '.aac', '.m4a', '.flac'].contains(ext)) {
           final outFile = File('${soundsDir.path}/$fileName');
-          final fileBytes = file.readBytes();
+          final fileBytes = file.content as List<int>;
           await outFile.writeAsBytes(fileBytes ?? []);
           extractedCount++;
           debugPrint('AmbientSoundService: extracted "$fileName"');
