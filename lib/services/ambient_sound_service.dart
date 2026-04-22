@@ -264,7 +264,10 @@ class AmbientSoundService {
           await outFile.writeAsBytes(fileBytes ?? []);
           extractedCount++;
           debugPrint('AmbientSoundService: extracted "$fileName"');
-        }
+        }catch (e) {
+    debugPrint('AmbientSoundService: failed to extract "$fileName": $e');
+  }
+}
       }
 
       debugPrint(
