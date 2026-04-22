@@ -259,17 +259,17 @@ class AmbientSoundService {
             ? fileName.substring(fileName.lastIndexOf('.')).toLowerCase()
             : '';
         if (['.mp3', '.wav', '.ogg', '.aac', '.m4a', '.flac'].contains(ext)) {
-          final outFile = File('${soundsDir.path}/$fileName');
-          final fileBytes = file.content as List<int>;
-          await outFile.writeAsBytes(fileBytes ?? []);
-          extractedCount++;
-          debugPrint('AmbientSoundService: extracted "$fileName"');
-        }catch (e) {
-    debugPrint('AmbientSoundService: failed to extract "$fileName": $e');
-  }
-}
+          try {
+            final outFile = File('${soundsDir.path}/$fileName');
+            final fileBytes = file.content as List<int>;
+            await outFile.writeAsBytes(fileBytes);
+            extractedCount++;
+            debugPrint('AmbientSoundService: extracted "$fileName"');
+          } catch (e) {
+            debugPrint('AmbientSoundService: failed to extract "$fileName": $e');
+          }
+        }
       }
-
       debugPrint(
         'AmbientSoundService: extracted $extractedCount audio files total',
       );
